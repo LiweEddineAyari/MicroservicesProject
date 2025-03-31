@@ -51,11 +51,13 @@ public class ReservationServiceImpl implements IReservationService {
         return reservationRepository.save(reservation);
     }
 
-//    public List<Reservation> trouverResSelonDateEtStatus(Date d, boolean b) {
-//        return reservationRepository.findAllByAnneeUniversitaireBeforeAndEstValide(d, b);
-//    }
+
 
     public void removeReservation(String reservationId) {
         reservationRepository.deleteById(reservationId);
     }
+
+
+////////////////////////////////////////////
+
 }

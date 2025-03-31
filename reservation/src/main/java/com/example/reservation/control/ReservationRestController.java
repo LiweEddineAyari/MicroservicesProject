@@ -36,13 +36,6 @@ public class ReservationRestController {
 
 
 
-//    @GetMapping("/retrieve-reservation-date-status/{d}/{v}")
-//    public List<Reservation> retrieveReservationParDateEtStatus
-//            (@PathVariable("d") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date d, @PathVariable("v") boolean b) {
-//        return reservationService.trouverResSelonDateEtStatus(d, b);
-//    }
-
-
 
 
 
@@ -71,5 +64,16 @@ public class ReservationRestController {
         Reservation reservation = reservationService.modifyReservation(r);
         return reservation;
     }
+
+
+
+
+
+
+
+//    @GetMapping("/retrieve-reservation-date-status/{d}/{v}")
+//    public List<Reservation> retrieveReservationParDateEtStatus
+//    }
+
 
 }
