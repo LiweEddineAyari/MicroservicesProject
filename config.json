@@ -1,0 +1,36 @@
+{
+    "realm": "microservices",
+    "enabled": true,
+    "clients": [
+      {
+        "clientId": "gateway-client",
+        "enabled": true,
+        "secret": "0JjUfBvbz5yehMjgzdtC7TNEYDvfUkMG",
+        "protocol": "openid-connect",
+        "publicClient": false,
+        "redirectUris": ["*"],
+        "clientAuthenticatorType": "client-secret",
+        "webOrigins": ["*"],
+        "serviceAccountsEnabled": true,
+        "authorizationServicesEnabled": false
+      }
+    ],
+    "users": [
+      {
+        "username": "user",
+        "enabled": true,
+        "email": "user@gmail.com",
+        "emailVerified": false,
+        "firstName": "Admin",
+        "lastName": "User",
+        "credentials": [
+          {
+            "type": "password",
+            "value": "admin",
+            "temporary": false
+          }
+        ]
+      }
+    ]
+  }
+  

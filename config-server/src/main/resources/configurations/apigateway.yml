@@ -1,0 +1,78 @@
+spring:
+
+  main:
+    allow-bean-definition-overriding: true
+    web-application-type : reactive
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://keycloak:8080/realms/microservices
+          jwk-set-uri: http://keycloak:8080/realms/microservices/protocol/openid-connect/certs
+  cloud:
+    gateway:
+      routes:
+        - id: bloc
+          uri: http://blocservice:8083
+          predicates:
+            - Path=/bloc/**
+          filters:
+            - name: RequestHeaderToRequestUri
+              args:
+                name: Authorization
+        - id: node
+          uri: http://app:5000
+          predicates:
+            - Path=/api/**
+        - id: chambre
+          uri: http://chambreservice:8085
+          # uri: lb://CHAMBRESERVICE
+          predicates:
+            - Path=/chambre/**
+          filters:
+            - name: RequestHeaderToRequestUri
+              args:
+                name: Authorization
+        - id: etudiant
+          uri: http://etudiantservice:8086
+          predicates:
+            - Path=/etudiant/**
+          filters:
+            - name: RequestHeaderToRequestUri
+              args:
+                name: Authorization
+        - id: foyer
+          uri: http://foyer:8087
+          predicates:
+            - Path=/foyer/**
+          filters:
+            - name: RequestHeaderToRequestUri
+              args:
+                name: Authorization
+        - id: reservation
+          uri: http://reservation:8088
+          predicates:
+            - Path=/reservation/**
+          filters:
+            - name: RequestHeaderToRequestUri
+              args:
+                name: Authorization
+server:
+  port: 8222
+
+eureka:
+  instance:
+    hostname: discovery-server
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://discovery-server:8761/eureka/
+
+keycloak:
+  server-url: http://keycloak:8080
+  resource: gateway-client
+  realm: microservices
+  client-id: gateway-client
+  client-secret: 0JjUfBvbz5yehMjgzdtC7TNEYDvfUkMG
+

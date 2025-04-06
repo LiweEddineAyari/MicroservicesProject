@@ -1,0 +1,103 @@
+
+version: '3.8'
+services:
+  discovery-server:
+    build: ./discovery
+    ports:
+      - "8761:8761"
+  keycloak:
+    image: quay.io/keycloak/keycloak:latest
+    command:
+      [
+        "start-dev",
+        "--import-realm",
+        "--http-enabled=true",
+        "--hostname-strict=false"
+      ]
+    environment:
+      - KEYCLOAK_ADMIN=admin
+      - KEYCLOAK_ADMIN_PASSWORD=admin
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./config.json:/opt/keycloak/data/import/config.json
+
+  config-server:
+    build: ./config-server
+    ports:
+      - "8888:8888"
+    
+  apigateway:
+    build: ./ApiGateway
+    ports:
+      - "8222:8222"
+    depends_on:
+      - config-server
+  mysqldb:
+    image: mysql:5.7
+    container_name: mysql_db
+    restart: always
+    environment:
+      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+      - MYSQL_DATABASE=blocdb_microservice
+    ports:
+      - 3307:3306
+    volumes:
+      - db:/var/lib/mysql
+
+
+
+  blocservice:
+    build: ./blocservice
+    ports:
+      - "8083:8083"
+    depends_on:
+      - config-server
+      - mysqldb
+
+  app:
+    build: ./universite-api
+    container_name: nodejs_app
+    ports:
+      - "5000:5000"  
+    env_file:
+      - ./universite-api/.env 
+    depends_on:
+      - mongo 
+  mongo:
+    image: mongo:latest
+    container_name: mongo
+    ports:
+      - "27017:27017"  
+  chambreservice:
+    build: ./chambreservice
+    ports:
+      - "8085:8085"
+    depends_on:
+      - config-server
+
+
+  etudiantservice:
+    build: ./etudiantservice
+    ports:
+      - "8086:8086"
+    depends_on:
+      - config-server
+
+
+  foyer:
+    build: ./Foyer
+    ports:
+      - "8087:8087"
+    depends_on:
+      - config-server
+
+
+  reservation:
+    build: ./reservation
+    ports:
+      - "8088:8088"
+    depends_on:
+      - config-server
+volumes:
+  db:

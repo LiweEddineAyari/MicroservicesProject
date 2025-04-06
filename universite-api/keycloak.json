@@ -1,0 +1,12 @@
+{
+    "realm": "microservices",
+    "auth-server-url": "http://localhost:8080",
+    "ssl-required": "external",
+    "resource": "gateway-client",
+    "credentials": {
+      "secret": "0JjUfBvbz5yehMjgzdtC7TNEYDvfUkMG"
+    },
+    "confidential-port": 0,
+    "policy-enforcer": {}
+  }
+  
