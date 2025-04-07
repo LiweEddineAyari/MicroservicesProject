@@ -1,4 +1,4 @@
-package com.example.foyer.config;
+package com.example.chambreservice.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

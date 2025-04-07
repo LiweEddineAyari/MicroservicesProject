@@ -1,4 +1,4 @@
-package com.example.foyer.config;
+package com.example.chambreservice.config;
 
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.security.core.GrantedAuthority;
