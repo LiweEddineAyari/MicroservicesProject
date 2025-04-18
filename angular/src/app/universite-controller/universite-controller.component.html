@@ -1,0 +1,72 @@
+<!-- universite-controller.component.html -->
+<div class="main-content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card-header card-header-danger flex justify-content-between justify-content-center" 
+               style="background: linear-gradient(40deg, #d45f5d, #ff0804);">
+            <h3 class="card-title " style="color: azure;font-weight: bolder;">Gestion des Universités</h3>
+            <button class="btn btn-success" (click)="showForm = true; isEditing = false">Ajouter Université</button>
+          </div>
+  
+          <!-- Add/Edit Form -->
+          <div class="card" *ngIf="showForm">
+            <div class="card-body">
+              <form (submit)="submitForm()">
+                <div class="form-group">
+                  <label>Nom de l'Université</label>
+                  <input type="text" class="form-control" 
+                         [(ngModel)]="selectedUniversite.nomUniversite" 
+                         name="nomUniversite" required>
+                </div>
+                <div class="form-group">
+                  <label>Adresse</label>
+                  <input type="text" class="form-control" 
+                         [(ngModel)]="selectedUniversite.adresse" 
+                         name="adresse" required>
+                </div>
+                <button type="submit" class="btn btn-primary">
+                  {{ isEditing ? 'Mettre à jour' : 'Ajouter' }}
+                </button>
+                <button type="button" class="btn btn-secondary" 
+                        (click)="resetForm()">Annuler</button>
+              </form>
+            </div>
+          </div>
+  
+          <!-- Universities Table -->
+          <div class="card">
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table">
+                  <thead class="text-primary">
+                    <tr>
+                      <th>ID</th>
+                      <th>Nom</th>
+                      <th>Adresse</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let universite of universites">
+                      <td>{{ universite._id }}</td>
+                      <td>{{ universite.nomUniversite }}</td>
+                      <td>{{ universite.adresse }}</td>
+                      <td>
+                        <button class="btn btn-warning btn-sm" 
+                                (click)="editUniversite(universite)">Modifier</button>
+                        <button class="btn btn-danger btn-sm ml-2" 
+                                (click)="deleteUniversite(universite._id || '')">
+                          Supprimer
+                        </button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

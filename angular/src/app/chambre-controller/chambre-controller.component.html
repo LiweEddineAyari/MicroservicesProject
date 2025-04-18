@@ -1,0 +1,93 @@
+<div class="main-content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card-header card-header-info flex justify-content-between justify-content-center"
+            style="background: linear-gradient(40deg, #d45f5d, #ff0804);">
+            <h3 class="card-title" style="color: azure; font-weight: bolder;">Gestion des Chambres</h3>
+            <button class="btn btn-success" (click)="showForm = true; isEditing = false">Ajouter Chambre</button>
+          </div>
+  
+          <!-- Add/Edit Form -->
+          <div class="card" *ngIf="showForm">
+            <div class="card-body">
+              <form (submit)="submitForm()">
+                <div class="form-group">
+                  <label>Numéro de Chambre</label>
+                  <input type="number" class="form-control" 
+                         [(ngModel)]="selectedChambre.numeroChambre" 
+                         name="numeroChambre" required>
+                </div>
+  
+                <div class="form-group">
+                  <label>Type de Chambre</label>
+                  <select class="form-control" 
+                          [(ngModel)]="selectedChambre.typeC" 
+                          name="typeC" required>
+                    <option *ngFor="let type of typeOptions" [value]="type">
+                      {{ type }}
+                    </option>
+                  </select>
+                </div>
+  
+                <div class="form-group">
+                  <label>Bloc</label>
+                  <select class="form-control" 
+                          [(ngModel)]="selectedChambre.idBloc" 
+                          name="idBloc" required>
+                    <option [ngValue]="null" disabled>Select a Bloc</option>
+                    <option *ngFor="let bloc of blocs" 
+                            [value]="bloc.idBloc">
+                      {{ bloc.nomBloc }} (Capacité: {{ bloc.capaciteBloc }})
+                    </option>
+                  </select>
+                </div>
+  
+                <button type="submit" class="btn btn-primary">
+                  {{ isEditing ? 'Mettre à jour' : 'Ajouter' }}
+                </button>
+                <button type="button" class="btn btn-secondary" 
+                        (click)="resetForm()">Annuler</button>
+              </form>
+            </div>
+          </div>
+  
+          <!-- Chambre Table -->
+          <div class="card">
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table">
+                  <thead class="text-primary">
+                    <tr>
+                      <th>ID</th>
+                      <th>Numéro</th>
+                      <th>Type</th>
+                      <th>Bloc ID</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let chambre of chambres">
+                      <td>{{ chambre.idChambre }}</td>
+                      <td>{{ chambre.numeroChambre }}</td>
+                      <td>{{ chambre.typeC }}</td>
+                      <td>{{ chambre.idBloc }}</td>
+                      <td>
+                        <button class="btn btn-warning btn-sm"
+                                (click)="editChambre(chambre)">Modifier</button>
+                        <button class="btn btn-danger btn-sm ml-2"
+                                (click)="deleteChambre(chambre.idChambre)">
+                          Supprimer
+                        </button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+  
+        </div>
+      </div>
+    </div>
+  </div>

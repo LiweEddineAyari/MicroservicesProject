@@ -1,0 +1,75 @@
+<!-- universite-controller.component.html -->
+<div class="main-content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card-header card-header-danger flex justify-content-between justify-content-center"
+            style="background: linear-gradient(40deg, #d45f5d, #ff0804);">
+            <h3 class="card-title " style="color: azure;font-weight: bolder;">Gestion des Étudiants</h3>
+            <button class="btn btn-success" (click)="showForm = true; isEditing = false">Ajouter Étudiant</button>
+          </div>
+  
+          <!-- Add/Edit Form -->
+          <div class="card" *ngIf="showForm">
+            <div class="card-body">
+              <form (submit)="submitForm()">
+                <div class="form-group">
+                  <label>Nom</label>
+                  <input type="text" class="form-control" [(ngModel)]="selectedEtudiant.nomEtudiant" name="nom" required>
+                </div>
+                <div class="form-group">
+                  <label>Prénom</label>
+                  <input type="text" class="form-control" [(ngModel)]="selectedEtudiant.prenomEtudiant" name="prenom" required>
+                </div>
+                <div class="form-group">
+                  <label>CIN</label>
+                  <input type="number" class="form-control" [(ngModel)]="selectedEtudiant.cinEtudiant" name="cin" required>
+                </div>
+                <div class="form-group">
+                  <label>Date de Naissance</label>
+                  <input type="date" class="form-control" [(ngModel)]="selectedEtudiant.dateNaissance" name="dateNaissance" required>
+                </div>
+                <button type="submit" class="btn btn-primary">{{ isEditing ? 'Mettre à jour' : 'Ajouter' }}</button>
+                <button type="button" class="btn btn-secondary" (click)="resetForm()">Annuler</button>
+              </form>
+            </div>
+          </div>
+  
+          <!-- Students Table -->
+          <div class="card">
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table">
+                  <thead class="text-primary">
+                    <tr>
+                      <th>ID</th>
+                      <th>Nom</th>
+                      <th>Prénom</th>
+                      <th>CIN</th>
+                      <th>Date de Naissance</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let etudiant of etudiants">
+                      <td>{{ etudiant.idEtudiant }}</td>
+                      <td>{{ etudiant.nomEtudiant }}</td>
+                      <td>{{ etudiant.prenomEtudiant }}</td>
+                      <td>{{ etudiant.cinEtudiant }}</td>
+                      <td>{{ etudiant.dateNaissance | date: 'dd/MM/yyyy' }}</td>
+                      <td>
+                        <button class="btn btn-warning btn-sm" (click)="editEtudiant(etudiant)">Modifier</button>
+                        <button class="btn btn-danger btn-sm ml-2" (click)="deleteEtudiant(etudiant.idEtudiant)">
+                          Supprimer
+                        </button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
