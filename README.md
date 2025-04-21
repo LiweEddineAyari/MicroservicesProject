@@ -1,49 +1,70 @@
-Microservices Architecture Project
-This project demonstrates the implementation of a microservices architecture designed to handle multiple services in a distributed environment. It utilizes various technologies, including Docker, Spring Boot, and Keycloak, orchestrated using Docker Compose.
+# 🧱 Microservices Architecture Project
 
-🚀 Technologies Used
-Docker Compose: For orchestrating multi-container Docker applications.
+This project demonstrates the implementation of a **microservices architecture** designed to handle multiple services in a distributed environment. It utilizes various technologies, including Docker, Spring Boot, and Keycloak, orchestrated using Docker Compose.
 
-Spring Boot: To build stand-alone, production-grade Spring-based applications.
+---
 
-Node.js: Used to implement the Reservation service for more flexibility and performance with asynchronous operations.
+## 🚀 Technologies Used
 
-Angular: Used to build the front-end of the entire application, offering a responsive and dynamic user interface.
+- **Docker Compose**: For orchestrating multi-container Docker applications.  
+- **Spring Boot**: To build stand-alone, production-grade Spring-based applications.  
+- **Node.js**: Used to implement the *Reservation* service, providing flexibility and efficient asynchronous processing.  
+- **Angular**: Front-end framework used to build the UI for the entire application.  
+- **Keycloak**: Provides authentication and authorization services.  
+- **Eureka (Netflix OSS)**: Acts as a service registry for enabling service discovery.  
+- **JWT (JSON Web Token)**: Used for secure communication between services.  
+- **Spring Cloud Config**: Centralized configuration management across all services.
 
-Keycloak: For authentication and authorization services.
+---
 
-Eureka: As a service registry for service discovery.
+## 🧱 Project Structure
 
-JWT (JSON Web Token): For secure communication between services.
+The system is composed of several microservices, each responsible for specific functionality:
 
-Spring Cloud Config: For centralized configuration management.
+- **ApiGateway**:  
+  Acts as the entry point to route external requests to the appropriate microservices.
 
-📁 Project Structure
-The system comprises several microservices, each responsible for specific functionalities:
+- **Config-Server**:  
+  Manages and serves configuration properties for all microservices from a central location.
 
-ApiGateway: Routes requests to appropriate microservices.
+- **Discovery Server (Eureka)**:  
+  Allows services to register and discover each other dynamically.
 
-Config-Server: Manages configuration properties for all services.
+- **BlocService (Spring Boot)**:  
+  Handles business logic related to housing blocks.
 
-Discovery Server (Eureka): Enables services to discover each other.
+- **ChambreService (Spring Boot)**:  
+  Manages room-related data and operations.
 
-BlocService (Spring Boot): Handles business logic related to blocks.
+- **EtudiantService (Spring Boot)**:  
+  Handles student-related information and actions.
 
-ChambreService (Spring Boot): Manages operations related to rooms.
+- **FoyerService (Spring Boot)**:  
+  Manages accommodation structures and related operations.
 
-EtudiantService (Spring Boot): Manages student data and operations.
+- **ReservationService (Node.js)**:  
+  Implements the booking and reservation logic using Node.js for modern, event-driven capabilities.
 
-FoyerService (Spring Boot): Manages accommodation data.
+- **Front-End (Angular)**:  
+  A user-friendly front-end built with Angular that interacts with the backend services through the API Gateway.
 
-ReservationService (Node.js): Handles booking and reservation functionalities with a modern JavaScript runtime.
+---
 
-Front-End (Angular): Provides the user interface for interacting with the entire system.
+## 🛠️ Getting Started
 
-## Getting Started
+To get started with the project:
 
-To set up and run the project locally, follow these steps:
+### Prerequisites
 
-1. **Clone the Repository**:
+- Docker  
+- Docker Compose  
+- Node.js (for local development of the reservation service)  
+- Angular CLI (if you want to run the front-end separately)
 
-   ```bash
-   git clone https://github.com/LiweEddineAyari/MicroservicesProject.git
+### Run the application
+
+1. Clone the repository:
+
+```bash
+git clone https://github.com/your-repo/microservices-project.git
+cd microservices-project
